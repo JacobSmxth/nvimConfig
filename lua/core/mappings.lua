@@ -70,10 +70,17 @@ map("n", "<leader>i", function()
   vim.fn.winrestview(view)
 end, { noremap = true, silent = true, desc = "Fix indentation" })
 
--- Telescope
-map("n", "<leader>ff", ":Telescope find_files<CR>", opts)  -- Find files
-map("n", "<leader>fg", ":Telescope live_grep<CR>", opts)   -- Live grep
-map("n", "<leader>fb", ":Telescope buffers<CR>", opts)     -- Find buffers
+-- ============================================================================
+-- SEARCH & NAVIGATION
+-- ============================================================================
+
+-- Fuzzy search in current buffer (replaces default /)
+map("n", "/", ":Telescope current_buffer_fuzzy_find<CR>", opts)
+
+-- Traditional search if you need it (use ? instead)
+map("n", "?", function()
+  vim.cmd("normal! /")
+end, { noremap = true, desc = "Traditional search" })
 
 -- ============================================================================
 -- ESSENTIAL MAPPINGS
