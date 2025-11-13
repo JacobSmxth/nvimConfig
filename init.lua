@@ -12,6 +12,7 @@ vim.cmd([[
   highlight CursorLine guibg=#2a2a2a ctermbg=235
   highlight CursorColumn guibg=#2a2a2a ctermbg=235
 
+
   highlight Comment guifg=#6a9955 gui=italic ctermfg=65 cterm=italic
 
   highlight Statement guifg=#c586c0 gui=bold ctermfg=175 cterm=bold
@@ -154,9 +155,11 @@ vim.cmd([[
   highlight TreesitterContext guibg=#252526 ctermbg=235
   highlight TreesitterContextLineNumber guifg=#858585 guibg=#252526 ctermfg=102 ctermbg=235
 
-  " Flash jump labels
-  highlight FlashLabel guifg=#000000 guibg=#ff007c gui=bold ctermfg=0 ctermbg=198 cterm=bold
-  highlight FlashMatch guifg=#4fc1ff gui=bold ctermfg=81 cterm=bold
+  " Hop jump labels
+  highlight HopNextKey guifg=#000000 guibg=#ff007c gui=bold ctermfg=0 ctermbg=198 cterm=bold
+  highlight HopNextKey1 guifg=#000000 guibg=#4fc1ff gui=bold ctermfg=0 ctermbg=81 cterm=bold
+  highlight HopNextKey2 guifg=#000000 guibg=#c586c0 ctermfg=0 ctermbg=175
+  highlight HopUnmatched guifg=#666666 ctermfg=242
 ]])
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"

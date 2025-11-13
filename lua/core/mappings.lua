@@ -69,6 +69,10 @@ map("n", "/", ":Telescope current_buffer_fuzzy_find<CR>", opts)
 -- Traditional search (? searches backward in vim)
 map("n", "?", "?", { noremap = true, desc = "Traditional backward search" })
 
+-- Center screen on search jumps
+map("n", "n", "nzzzv", opts)
+map("n", "N", "Nzzzv", opts)
+
 -- Telescope
 map("n", "<leader>ff", ":Telescope find_files<CR>", opts)
 map("n", "<leader>fg", ":Telescope live_grep<CR>", opts)

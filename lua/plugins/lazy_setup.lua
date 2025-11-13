@@ -262,35 +262,17 @@ require("lazy").setup({
     end,
   },
 
-  -- Harpoon marks
+  -- Hop motion (simpler alternative to flash)
   {
-    "ThePrimeagen/harpoon",
-    branch = "harpoon2",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    config = function()
-      local harpoon = require("harpoon")
-      harpoon:setup()
-
-      vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end, { desc = "Harpoon: Add file" })
-
-      vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Harpoon: Menu" })
-
-      -- Jump marks
-      vim.keymap.set("n", "<C-t>", function() harpoon:list():select(1) end, { desc = "Harpoon: File 1" })
-      vim.keymap.set("n", "<C-y>", function() harpoon:list():select(2) end, { desc = "Harpoon: File 2" })
-      vim.keymap.set("n", "<C-u>", function() harpoon:list():select(3) end, { desc = "Harpoon: File 3" })
-      vim.keymap.set("n", "<C-p>", function() harpoon:list():select(4) end, { desc = "Harpoon: File 4" })
-    end,
-  },
-
-  -- Flash motion
-  {
-    "folke/flash.nvim",
-    event = "VeryLazy",
-    opts = {},
+    "smoka7/hop.nvim",
+    version = "*",
     keys = {
-      { "m", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-      { "M", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+      { "m", "<cmd>HopWord<cr>", mode = { "n", "x", "o" }, desc = "Hop to word" },
+      { "M", "<cmd>HopLine<cr>", mode = { "n", "x", "o" }, desc = "Hop to line" },
+    },
+    opts = {
+      keys = "etovxqpdygfblzhckisuran",
+      jump_on_sole_occurrence = true,
     },
   },
 
@@ -361,7 +343,8 @@ require("lazy").setup({
     "folke/which-key.nvim",
     event = "VeryLazy",
     config = function()
-      require("which-key").setup({
+      local wk = require("which-key")
+      wk.setup({
         preset = "modern",
         icons = {
           breadcrumb = ">",
@@ -381,6 +364,63 @@ require("lazy").setup({
           spacing = 3,
           align = "center",
         },
+      })
+
+      -- Register key group descriptions
+      wk.add({
+        -- Main leader groups
+        { "<leader>f", group = "Find (Telescope)" },
+        { "<leader>b", group = "Buffers" },
+        { "<leader>g", group = "Git" },
+        { "<leader>l", group = "LSP" },
+        { "<leader>t", group = "Terminal/Toggle" },
+        { "<leader>x", group = "Trouble/Diagnostics" },
+        { "<leader>w", group = "Window" },
+        { "<leader>o", group = "Options/Other" },
+
+        -- Filetype-adaptive code/compile group (changes based on current file)
+        -- In C/C++: compile, run, debug, valgrind, make
+        -- In Python: run, test, lint, format, venv
+        -- In Java: compile, run, gradle, test
+        { "<leader>c", group = "Code/Compile (filetype)" },
+
+        -- Common LSP actions
+        { "<leader>ca", desc = "Code Action" },
+        { "<leader>rn", desc = "Rename Symbol" },
+
+        -- Git operations
+        { "<leader>gg", desc = "Open Lazygit" },
+        { "<leader>gb", desc = "Git Blame" },
+        { "<leader>gd", desc = "Git Diff" },
+        { "<leader>gs", desc = "Git Status" },
+
+        -- Find operations
+        { "<leader>ff", desc = "Find Files" },
+        { "<leader>fg", desc = "Find in Files (Grep)" },
+        { "<leader>fb", desc = "Find Buffers" },
+        { "<leader>fh", desc = "Find Help" },
+        { "<leader>fo", desc = "Find Old Files" },
+        { "<leader>fc", desc = "Find Commands" },
+        { "<leader>fk", desc = "Find Keymaps" },
+        { "<leader>fm", desc = "Find Marks" },
+
+        -- Buffer operations
+        { "<leader>bd", desc = "Delete Buffer" },
+        { "<leader>bn", desc = "Next Buffer" },
+        { "<leader>bp", desc = "Previous Buffer" },
+
+        -- Terminal
+        { "<leader>tt", desc = "Toggle Terminal" },
+        { "<leader>tf", desc = "Toggle Float Terminal" },
+        { "<leader>th", desc = "Toggle Horizontal Terminal" },
+        { "<leader>tv", desc = "Toggle Vertical Terminal" },
+
+        -- Tree
+        { "<leader>e", desc = "Toggle File Explorer" },
+
+        -- Other
+        { "<leader>h", desc = "Clear Highlights" },
+        { "<leader>oi", desc = "Organize Imports (Java)" },
       })
     end,
   },

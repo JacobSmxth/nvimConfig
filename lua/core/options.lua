@@ -29,6 +29,9 @@ o.undoreload = 10000
 -- Cursorline highlight
 o.cursorline = true
 
+-- Make cursor block - terminal controls colors
+o.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
+
 -- Keep context
 o.scrolloff = 8
 o.sidescrolloff = 8

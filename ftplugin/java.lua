@@ -63,6 +63,38 @@ jdtls.start_or_attach(config)
 local map = vim.keymap.set
 local opts = { buffer = true, silent = true }
 
+-- ============================================================================
+-- LSP KEYBINDINGS (jdtls-specific, since we bypass lsp.lua)
+-- ============================================================================
+
+-- Wait for LSP to attach, then set up keybindings
+vim.api.nvim_create_autocmd("LspAttach", {
+  buffer = 0,
+  callback = function(args)
+    local bufnr = args.buf
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+    -- Only set up for jdtls
+    if client.name ~= "jdtls" then
+      return
+    end
+
+    -- LSP keybindings
+    map("n", "gd", vim.lsp.buf.definition, { buffer = bufnr, desc = "LSP: Go to Definition" })
+    map("n", "gr", vim.lsp.buf.references, { buffer = bufnr, desc = "LSP: References" })
+    map("n", "K", vim.lsp.buf.hover, { buffer = bufnr, desc = "LSP: Hover" })
+    map("n", "<leader>rn", vim.lsp.buf.rename, { buffer = bufnr, desc = "LSP: Rename" })
+    map("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = bufnr, desc = "LSP: Code Action" })
+    map("n", "<leader>oi", function()
+      require("jdtls").organize_imports()
+    end, { buffer = bufnr, desc = "Java: Organize Imports" })
+  end,
+})
+
+-- ============================================================================
+-- JAVA BUILD/RUN KEYBINDINGS
+-- ============================================================================
+
 -- Get the current class name from the file
 local function get_class_name()
   local filename = vim.fn.expand("%:t:r") -- Get filename without extension
@@ -84,53 +116,53 @@ local function find_main_class()
   return nil
 end
 
--- <leader>jc - Compile current Java file
-map("n", "<leader>jc", function()
+-- <leader>cc - Compile current Java file
+map("n", "<leader>cc", function()
   vim.cmd("w") -- Save first
   vim.cmd("!javac %")
 end, vim.tbl_extend("force", opts, { desc = "Java: Compile current file" }))
 
--- <leader>jr - Compile and run current Java file
-map("n", "<leader>jr", function()
+-- <leader>cr - Compile and run current Java file
+map("n", "<leader>cr", function()
   vim.cmd("w") -- Save first
   local file = vim.fn.expand("%")
   local class = vim.fn.expand("%:r")
-  vim.cmd(string.format("TermExec cmd='javac %s && java %s'", file, class))
+  vim.cmd(string.format("TermExec cmd='clear && javac %s 2>&1 && java %s'", file, class))
 end, vim.tbl_extend("force", opts, { desc = "Java: Compile and run" }))
 
--- <leader>jm - Run with manual class specification (for multi-file projects)
-map("n", "<leader>jm", function()
+-- <leader>cm - Run with manual class specification (for multi-file projects)
+map("n", "<leader>cm", function()
   vim.ui.input({ prompt = "Main class name: ", default = get_class_name() }, function(main_class)
     if main_class and main_class ~= "" then
       vim.cmd("w") -- Save first
       local file = vim.fn.expand("%")
-      vim.cmd(string.format("TermExec cmd='javac %s && java %s'", file, main_class))
+      vim.cmd(string.format("TermExec cmd='clear && javac %s 2>&1 && java %s'", file, main_class))
     end
   end)
 end, vim.tbl_extend("force", opts, { desc = "Java: Compile and run (specify main class)" }))
 
--- <leader>jg - Run with Gradle (for Spring Boot projects)
-map("n", "<leader>jg", function()
+-- <leader>cg - Run with Gradle (for Spring Boot projects)
+map("n", "<leader>cg", function()
   if root_dir then
-    vim.cmd(string.format("TermExec cmd='cd %s && ./gradlew bootRun'", root_dir))
+    vim.cmd(string.format("TermExec cmd='clear && cd %s && ./gradlew bootRun'", root_dir))
   else
     vim.notify("No Gradle project root found", vim.log.levels.ERROR)
   end
 end, vim.tbl_extend("force", opts, { desc = "Java: Run with Gradle (bootRun)" }))
 
--- <leader>jb - Build with Gradle
-map("n", "<leader>jb", function()
+-- <leader>cb - Build with Gradle
+map("n", "<leader>cb", function()
   if root_dir then
-    vim.cmd(string.format("TermExec cmd='cd %s && ./gradlew build'", root_dir))
+    vim.cmd(string.format("TermExec cmd='clear && cd %s && ./gradlew build'", root_dir))
   else
     vim.notify("No Gradle project root found", vim.log.levels.ERROR)
   end
 end, vim.tbl_extend("force", opts, { desc = "Java: Build with Gradle" }))
 
--- <leader>jt - Run tests with Gradle
-map("n", "<leader>jt", function()
+-- <leader>ct - Run tests with Gradle
+map("n", "<leader>ct", function()
   if root_dir then
-    vim.cmd(string.format("TermExec cmd='cd %s && ./gradlew test'", root_dir))
+    vim.cmd(string.format("TermExec cmd='clear && cd %s && ./gradlew test'", root_dir))
   else
     vim.notify("No Gradle project root found", vim.log.levels.ERROR)
   end

@@ -53,9 +53,11 @@ autocmd("FileType", {
   end,
 })
 
-augroup("IndentSettings", { clear = true })
+local indent_group = augroup("IndentSettings", { clear = true })
+
+-- Default: 2 spaces for most filetypes
 autocmd("FileType", {
-  group = "IndentSettings",
+  group = indent_group,
   pattern = "*",
   callback = function()
     vim.opt_local.expandtab = true
@@ -65,14 +67,27 @@ autocmd("FileType", {
   end,
 })
 
--- Python/Go override
+-- Python/Go: 4 spaces
 autocmd("FileType", {
-  group = "IndentSettings",
+  group = indent_group,
   pattern = { "python", "go" },
   callback = function()
     vim.opt_local.expandtab = true
     vim.opt_local.shiftwidth = 4
     vim.opt_local.tabstop = 4
     vim.opt_local.softtabstop = 4
+  end,
+})
+
+-- Force cursor colors after colorscheme loads
+augroup("CursorColors", { clear = true })
+autocmd({ "VimEnter", "ColorScheme" }, {
+  group = "CursorColors",
+  pattern = "*",
+  callback = function()
+    vim.cmd([[
+      highlight Cursor guifg=#000000 guibg=#4fc1ff ctermfg=0 ctermbg=81
+      highlight lCursor guifg=#000000 guibg=#4fc1ff ctermfg=0 ctermbg=81
+    ]])
   end,
 })
