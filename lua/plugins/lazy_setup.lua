@@ -85,6 +85,15 @@ require("lazy").setup({
           "typescript-language-server",
           "rust-analyzer",
           "google-java-format",
+          "gopls",
+          "delve",
+          "gofumpt",
+          "goimports",
+          "html-lsp",
+          "css-lsp",
+          "emmet-ls",
+          "prettier",
+          "eslint_d",
         },
         auto_update = false,
         run_on_start = true,
@@ -139,13 +148,17 @@ require("lazy").setup({
         formatters_by_ft = {
           java = { "google-java-format" },
           python = { "isort", "black" },
-          javascript = { "prettier" },
-          typescript = { "prettier" },
+          javascript = { "prettier", "eslint_d" },
+          typescript = { "prettier", "eslint_d" },
+          javascriptreact = { "prettier", "eslint_d" },
+          typescriptreact = { "prettier", "eslint_d" },
           json = { "prettier" },
           yaml = { "prettier" },
           markdown = { "prettier" },
           html = { "prettier" },
           css = { "prettier" },
+          scss = { "prettier" },
+          go = { "goimports", "gofumpt" },
         },
         formatters = {
           ["google-java-format"] = {
@@ -183,6 +196,39 @@ require("lazy").setup({
     dependencies = { "rafamadriz/friendly-snippets" },
     config = function()
       require("luasnip.loaders.from_vscode").lazy_load()
+
+      local ls = require("luasnip")
+      local s = ls.snippet
+      local t = ls.text_node
+      local f = ls.function_node
+
+      local lorem_words = {
+        "lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipiscing", "elit",
+        "sed", "do", "eiusmod", "tempor", "incididunt", "ut", "labore", "et", "dolore",
+        "magna", "aliqua", "enim", "ad", "minim", "veniam", "quis", "nostrud",
+        "exercitation", "ullamco", "laboris", "nisi", "aliquip", "ex", "ea", "commodo",
+        "consequat", "duis", "aute", "irure", "in", "reprehenderit", "voluptate",
+        "velit", "esse", "cillum", "fugiat", "nulla", "pariatur", "excepteur", "sint",
+        "occaecat", "cupidatat", "non", "proident", "sunt", "culpa", "qui", "officia",
+        "deserunt", "mollit", "anim", "id", "est", "laborum"
+      }
+
+      local function generate_lorem(count)
+        local words = {}
+        for i = 1, count do
+          table.insert(words, lorem_words[(i - 1) % #lorem_words + 1])
+        end
+        return table.concat(words, " ")
+      end
+
+      ls.add_snippets("all", {
+        s("lorem10", f(function() return generate_lorem(10) end)),
+        s("lorem20", f(function() return generate_lorem(20) end)),
+        s("lorem50", f(function() return generate_lorem(50) end)),
+        s("lorem100", f(function() return generate_lorem(100) end)),
+        s("lorem200", f(function() return generate_lorem(200) end)),
+        s("lorem500", f(function() return generate_lorem(500) end)),
+      })
     end,
   },
 
@@ -310,6 +356,11 @@ require("lazy").setup({
     opts = {},
   },
 
+  -- Lorem Ipsum generator
+  {
+    "derektata/lorem.nvim",
+  },
+
   -- Treesitter context (sticky scroll)
   {
     "nvim-treesitter/nvim-treesitter-context",
@@ -377,6 +428,7 @@ require("lazy").setup({
         { "<leader>x", group = "Trouble/Diagnostics" },
         { "<leader>w", group = "Window" },
         { "<leader>o", group = "Options/Other" },
+        { "<leader>d", group = "Debug (DAP)" },
 
         -- Filetype-adaptive code/compile group (changes based on current file)
         -- In C/C++: compile, run, debug, valgrind, make
@@ -432,6 +484,66 @@ require("lazy").setup({
     config = function()
       require("plugins.configs.toggleterm")
     end,
+  },
+
+  -- DAP (Debug Adapter Protocol)
+  {
+    "mfussenegger/nvim-dap",
+    dependencies = {
+      "rcarriga/nvim-dap-ui",
+      "nvim-neotest/nvim-nio",
+      "theHamsta/nvim-dap-virtual-text",
+      "leoluz/nvim-dap-go",
+    },
+    keys = {
+      { "<leader>db", "<cmd>lua require('dap').toggle_breakpoint()<cr>", desc = "Toggle Breakpoint" },
+      { "<leader>dc", "<cmd>lua require('dap').continue()<cr>", desc = "Continue" },
+      { "<leader>di", "<cmd>lua require('dap').step_into()<cr>", desc = "Step Into" },
+      { "<leader>do", "<cmd>lua require('dap').step_over()<cr>", desc = "Step Over" },
+      { "<leader>dO", "<cmd>lua require('dap').step_out()<cr>", desc = "Step Out" },
+      { "<leader>dr", "<cmd>lua require('dap').repl.toggle()<cr>", desc = "Toggle REPL" },
+      { "<leader>dl", "<cmd>lua require('dap').run_last()<cr>", desc = "Run Last" },
+      { "<leader>dt", "<cmd>lua require('dap').terminate()<cr>", desc = "Terminate" },
+      { "<leader>du", "<cmd>lua require('dapui').toggle()<cr>", desc = "Toggle UI" },
+    },
+    config = function()
+      local dap = require("dap")
+      local dapui = require("dapui")
+
+      dapui.setup()
+
+      -- Auto open/close UI
+      dap.listeners.before.attach.dapui_config = function()
+        dapui.open()
+      end
+      dap.listeners.before.launch.dapui_config = function()
+        dapui.open()
+      end
+      dap.listeners.before.event_terminated.dapui_config = function()
+        dapui.close()
+      end
+      dap.listeners.before.event_exited.dapui_config = function()
+        dapui.close()
+      end
+
+      require("nvim-dap-virtual-text").setup()
+      require("dap-go").setup()
+    end,
+  },
+
+  {
+    "rcarriga/nvim-dap-ui",
+    dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
+  },
+
+  {
+    "theHamsta/nvim-dap-virtual-text",
+    dependencies = { "mfussenegger/nvim-dap" },
+  },
+
+  {
+    "leoluz/nvim-dap-go",
+    dependencies = { "mfussenegger/nvim-dap" },
   },
 
   -- Statusline

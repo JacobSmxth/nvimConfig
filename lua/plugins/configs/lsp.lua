@@ -12,6 +12,7 @@ local function on_attach(_, bufnr)
   map("n", "gr", vim.lsp.buf.references, "LSP: References")
   map("n", "K", vim.lsp.buf.hover, "LSP: Hover")
   map("n", "<leader>rn", vim.lsp.buf.rename, "LSP: Rename")
+
   map("n", "<leader>ca", vim.lsp.buf.code_action, "LSP: Code Action")
 end
 
@@ -72,5 +73,23 @@ setup_lsp("rust_analyzer", {
   },
 })
 
--- Note: Java (JDTLS) is configured in ftplugin/java.lua
--- This is because jdtls requires special handling and project-specific setup
+-- HTML
+setup_lsp("html", {
+  cmd = { "vscode-html-language-server", "--stdio" },
+  filetypes = { "html" },
+  root_markers = { "package.json", ".git" },
+})
+
+-- CSS
+setup_lsp("cssls", {
+  cmd = { "vscode-css-language-server", "--stdio" },
+  filetypes = { "css", "scss", "less" },
+  root_markers = { "package.json", ".git" },
+})
+
+-- Emmet
+setup_lsp("emmet_ls", {
+  cmd = { "emmet-ls", "--stdio" },
+  filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact" },
+  root_markers = { "package.json", ".git" },
+})
