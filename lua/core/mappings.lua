@@ -31,6 +31,73 @@ map("n", "<leader>ff", ":Telescope find_files<CR>", opts)
 map("n", "<leader>fg", ":Telescope live_grep<CR>", opts)
 map("n", "<leader>fb", ":Telescope buffers<CR>", opts)
 map("n", "<leader>fs", ":AutoSession search<CR>", { noremap = true, silent = true, desc = "Find sessions" })
+map("n", "<leader>fd", function()
+  local ok_lib, lib = pcall(require, "auto-session.lib")
+  local ok_pickers, pickers = pcall(require, "telescope.pickers")
+  local ok_finders, finders = pcall(require, "telescope.finders")
+  local ok_conf, conf = pcall(require, "telescope.config")
+  local ok_actions, actions = pcall(require, "telescope.actions")
+  local ok_action_state, action_state = pcall(require, "telescope.actions.state")
+
+  if not (ok_lib and ok_pickers and ok_finders and ok_conf and ok_actions and ok_action_state) then
+    vim.notify("auto-session or Telescope not available", vim.log.levels.ERROR)
+    return
+  end
+
+  -- Get all session files
+  local sessions = vim.fn.glob(vim.fn.stdpath("data") .. "/sessions/*.vim", false, true)
+  local session_names = {}
+
+  for _, session_path in ipairs(sessions) do
+    local name = vim.fn.fnamemodify(session_path, ":t:r")
+    -- Decode the session name (auto-session uses URL encoding)
+    name = name:gsub("%%(%x%x)", function(hex)
+      return string.char(tonumber(hex, 16))
+    end)
+    table.insert(session_names, { name = name, path = session_path })
+  end
+
+  if #session_names == 0 then
+    vim.notify("No sessions found", vim.log.levels.WARN)
+    return
+  end
+
+  pickers.new({}, {
+    prompt_title = "Delete Session",
+    finder = finders.new_table({
+      results = session_names,
+      entry_maker = function(entry)
+        return {
+          value = entry,
+          display = entry.name,
+          ordinal = entry.name,
+        }
+      end,
+    }),
+    sorter = conf.values.generic_sorter({}),
+    attach_mappings = function(prompt_bufnr)
+      actions.select_default:replace(function()
+        local selection = action_state.get_selected_entry()
+        actions.close(prompt_bufnr)
+
+        -- Confirm deletion
+        vim.ui.input({
+          prompt = "Delete session '" .. selection.value.name .. "'? (y/N): ",
+        }, function(input)
+          if input and (input:lower() == "y" or input:lower() == "yes") then
+            local ok = os.remove(selection.value.path)
+            if ok then
+              vim.notify("Deleted session: " .. selection.value.name, vim.log.levels.INFO)
+            else
+              vim.notify("Failed to delete session", vim.log.levels.ERROR)
+            end
+          end
+        end)
+      end)
+      return true
+    end,
+  }):find()
+end, { noremap = true, silent = true, desc = "Delete session" })
 map("n", "<leader>fm", function()
   local ok_pickers, pickers = pcall(require, "telescope.pickers")
   local ok_finders, finders = pcall(require, "telescope.finders")
@@ -85,6 +152,7 @@ map("t", "jj", "<C-\\><C-n>", opts)
 
 map("n", "<S-L>", ":bnext<CR>", opts)
 map("n", "<S-H>", ":bprevious<CR>", opts)
+map("n", "<leader>bd", ":bdelete<CR>", { noremap = true, silent = true, desc = "Delete buffer" })
 
 map("n", "<Esc>", ":noh<CR>", opts)
 
@@ -127,13 +195,5 @@ map("n", "gi>", "vi>o<Esc>", { noremap = true, silent = true, desc = "Go inner >
 map("n", "[d", vim.diagnostic.goto_prev, { noremap = true, silent = true, desc = "Previous diagnostic" })
 map("n", "]d", vim.diagnostic.goto_next, { noremap = true, silent = true, desc = "Next diagnostic" })
 
--- Reload config
-map("n", "<leader>R", function()
-  for name, _ in pairs(package.loaded) do
-    if name:match("^core") or name:match("^plugins") then
-      package.loaded[name] = nil
-    end
-  end
-  dofile(vim.env.MYVIMRC)
-  vim.notify("Config reloaded!", vim.log.levels.INFO)
-end, { noremap = true, silent = true, desc = "Reload config" })
+-- Note: For full reload, restart nvim or use :Lazy reload <plugin>
+-- This mapping has been removed - just restart nvim for config changes

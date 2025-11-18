@@ -296,14 +296,15 @@ require("lazy").setup({
 
       vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
+      -- Suppress session messages immediately
+      vim.opt.shortmess:append("F")
       local group = vim.api.nvim_create_augroup("AutoSessionMessages", { clear = true })
       vim.api.nvim_create_autocmd("User", {
         group = group,
-        pattern = "AutoSessionRestored",
+        pattern = { "AutoSessionRestored", "AutoSessionLoadPre", "AutoSessionSavePre" },
         callback = function()
-          vim.defer_fn(function()
-            vim.cmd("echon ''")
-          end, 2000)
+          vim.cmd("echon ''")
+          vim.opt.cmdheight = 0
         end,
       })
     end,

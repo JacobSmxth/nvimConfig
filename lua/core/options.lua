@@ -13,8 +13,8 @@ o.tabstop = 2
 o.softtabstop = 2
 o.smartindent = true
 
--- Enable mouse (allows scrolling in terminal)
-o.mouse = "a"
+-- Disable mouse (no scroll-only mode available)
+o.mouse = ""
 
 -- System clipboard
 o.clipboard = "unnamedplus"

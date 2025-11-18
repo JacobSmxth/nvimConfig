@@ -25,6 +25,7 @@ A modern, performance-focused Neovim configuration built to glorify the Lord thr
 | Keybind | Description |
 |---------|-------------|
 | `Shift+H` / `Shift+L` | Previous/Next buffer |
+| `<leader>bd` | Delete buffer |
 | `Ctrl+h/j/k/l` | Navigate windows |
 | `<leader><leader>` | Toggle last two buffers |
 | `-` | Open parent directory (Oil) |
@@ -42,6 +43,7 @@ A modern, performance-focused Neovim configuration built to glorify the Lord thr
 | `<leader>fg` | Live grep (search in files) |
 | `<leader>fb` | Find buffers |
 | `<leader>fs` | Find sessions |
+| `<leader>fd` | Delete session |
 | `<leader>fm` | Find man pages |
 
 ### Harpoon (Quick File Bookmarks)
@@ -146,7 +148,6 @@ Select inside and jump to end:
 | Keybind | Description |
 |---------|-------------|
 | `<leader>u` | Undo tree |
-| `<leader>R` | Reload config |
 | `Ctrl+\` | Toggle terminal |
 | `Esc` | Clear search highlight |
 
@@ -241,7 +242,7 @@ Select inside and jump to end:
 - **Indentation**: 2 spaces (4 for Python/Go)
 - **Clipboard**: System clipboard integrated
 - **Persistent undo**: Enabled with 1000 levels
-- **Mouse**: Enabled for scrolling only
+- **Mouse**: Disabled
 - **No swap/backup files**
 
 ### Search
@@ -292,14 +293,22 @@ Select inside and jump to end:
 
 ## Session Management
 
-Sessions auto-save on exit for git projects.
+Sessions automatically save on exit and restore on startup.
 
-### Commands
-- `:AutoSession save` - Manual save
-- `:AutoSession delete` - Delete session
-- `<leader>fs` - Find/restore sessions (Telescope)
+### How It Works
+- **Auto-save**: Saves your workspace (buffers, splits, positions) when you exit nvim
+- **Auto-restore**: Restores your exact layout when you reopen nvim in the same directory
+- **Per git branch**: Each git branch gets its own session (switch branches = different session)
+- **Excluded dirs**: Sessions are NOT saved in `~/`, `~/Downloads`, or `/`
 
-Sessions are saved per git branch automatically.
+### Keybindings & Commands
+- `<leader>fs` - Find/restore sessions (Telescope fuzzy finder)
+- `<leader>fd` - Delete session (Telescope fuzzy finder with confirmation)
+- `:AutoSession save` - Manual save current session
+- `:AutoSession delete` - Delete current session
+
+### What Gets Saved
+Buffers, splits, window positions, folds, tabs, terminal windows, and local options.
 
 ---
 
