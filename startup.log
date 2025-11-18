@@ -1,0 +1,657 @@
+--- Startup times for process: Primary (or UI client) ---
+
+times in msec
+ clock   self+sourced   self:  sourced script
+ clock   elapsed:              other lines
+
+000.000  000.000: --- NVIM STARTING ---
+000.187  000.186: event init
+000.275  000.088: early init
+000.312  000.037: locale set
+000.367  000.056: init first window
+000.849  000.482: inits 1
+000.857  000.007: window checked
+000.860  000.003: parsing arguments
+001.466  000.051  000.051: require('vim.shared')
+001.568  000.044  000.044: require('vim.inspect')
+001.624  000.045  000.045: require('vim._options')
+001.626  000.157  000.068: require('vim._editor')
+001.628  000.245  000.037: require('vim._init_packages')
+001.629  000.525: init lua interpreter
+002.692  001.063: nvim_ui_attach
+003.131  000.439: nvim_set_client_info
+003.133  000.003: --- NVIM STARTED ---
+
+--- Startup times for process: Embedded ---
+
+times in msec
+ clock   self+sourced   self:  sourced script
+ clock   elapsed:              other lines
+
+000.000  000.000: --- NVIM STARTING ---
+000.111  000.111: event init
+000.181  000.070: early init
+000.217  000.036: locale set
+000.247  000.030: init first window
+000.603  000.356: inits 1
+000.614  000.011: window checked
+000.617  000.003: parsing arguments
+001.203  000.047  000.047: require('vim.shared')
+001.324  000.056  000.056: require('vim.inspect')
+001.410  000.074  000.074: require('vim._options')
+001.413  000.207  000.077: require('vim._editor')
+001.415  000.286  000.033: require('vim._init_packages')
+001.417  000.514: init lua interpreter
+001.483  000.066: expanding arguments
+001.508  000.024: inits 2
+001.880  000.373: init highlight
+001.882  000.002: waiting for UI
+002.146  000.264: done waiting for UI
+002.170  000.025: clear screen
+002.354  000.020  000.020: require('vim.keymap')
+003.513  000.204  000.204: sourcing nvim_exec2()
+003.684  001.510  001.287: require('vim._defaults')
+003.687  000.006: init default mappings & autocommands
+004.241  000.080  000.080: sourcing /usr/share/nvim/runtime/ftplugin.vim
+004.337  000.044  000.044: sourcing /usr/share/nvim/runtime/indent.vim
+004.544  000.139  000.139: sourcing /usr/share/nvim/archlinux.lua
+004.552  000.179  000.040: sourcing /etc/xdg/nvim/sysinit.vim
+005.517  000.679  000.679: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+006.507  000.899  000.899: require('core.options')
+009.910  000.014  000.014: require('vim.F')
+009.975  002.339  002.325: require('vim.diagnostic')
+010.053  003.541  001.202: require('core.mappings')
+010.388  000.199  000.199: require('vim.ui')
+010.464  000.407  000.209: require('core.autocmds')
+011.412  000.174  000.174: require('lazy')
+011.557  000.054  000.054: require('ffi')
+011.778  000.153  000.153: require('vim.fs')
+011.893  000.111  000.111: require('vim.uri')
+011.911  000.345  000.081: require('vim.loader')
+012.076  000.143  000.143: require('lazy.stats')
+012.189  000.090  000.090: require('lazy.core.util')
+012.293  000.102  000.102: require('lazy.core.config')
+012.534  000.151  000.151: require('lazy.core.handler')
+012.742  000.046  000.046: require('lazy.pkg')
+012.747  000.131  000.085: require('lazy.core.meta')
+012.754  000.218  000.087: require('lazy.core.plugin')
+012.762  000.467  000.098: require('lazy.core.loader')
+013.086  000.052  000.052: require('lazy.core.fragments')
+016.616  000.133  000.133: require('lazy.core.handler.keys')
+016.801  000.177  000.177: require('lazy.core.handler.cmd')
+017.004  000.198  000.198: require('lazy.core.handler.event')
+017.074  000.065  000.065: require('lazy.core.handler.ft')
+017.438  000.013  000.013: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+017.455  000.002  000.002: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+017.492  000.002  000.002: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+017.502  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+017.652  000.002  000.002: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+017.662  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+018.470  000.004  000.004: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+018.487  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+018.921  000.110  000.110: sourcing nvim_exec2() called at /usr/share/nvim/runtime/filetype.lua:0
+018.925  000.329  000.219: sourcing /usr/share/nvim/runtime/filetype.lua
+018.929  000.352  000.023: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+019.215  000.002  000.002: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+019.228  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+020.463  000.031  000.031: require('mason-core.path')
+020.647  000.037  000.037: require('mason-core.functional.data')
+020.719  000.069  000.069: require('mason-core.functional.function')
+020.806  000.081  000.081: require('mason-core.functional.list')
+020.848  000.034  000.034: require('mason-core.functional.relation')
+020.922  000.071  000.071: require('mason-core.functional.logic')
+020.978  000.053  000.053: require('mason-core.functional.number')
+021.060  000.052  000.052: require('mason-core.functional.string')
+021.093  000.029  000.029: require('mason-core.functional.table')
+021.121  000.025  000.025: require('mason-core.functional.type')
+021.124  000.562  000.110: require('mason-core.functional')
+021.155  000.689  000.127: require('mason-core.platform')
+021.217  000.061  000.061: require('mason.settings')
+021.221  000.849  000.068: require('mason-core.installer.InstallLocation')
+021.362  000.053  000.053: require('mason-core.log')
+021.365  000.101  000.048: require('mason-core.EventEmitter')
+021.402  000.036  000.036: require('mason-registry.sources')
+021.407  000.184  000.048: require('mason-registry')
+021.409  002.177  001.144: require('mason')
+021.699  000.110  000.110: require('mason.api.command')
+022.095  000.005  000.005: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+022.103  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+022.204  000.002  000.002: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+022.209  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+022.303  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+022.312  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+022.421  000.076  000.076: sourcing /home/jsmitty/.local/share/nvim/lazy/nvim-dap/plugin/dap.lua
+022.424  000.096  000.019: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+022.429  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+022.434  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+023.357  000.059  000.059: require('dap.utils')
+023.403  000.965  000.906: require('dap')
+023.582  000.071  000.071: require('nio.tasks')
+023.615  000.032  000.032: require('nio.control')
+023.756  000.140  000.140: require('nio.uv')
+023.802  000.045  000.045: require('nio.tests')
+023.837  000.033  000.033: require('nio.ui')
+023.905  000.031  000.031: require('nio.streams')
+023.907  000.068  000.038: require('nio.file')
+024.036  000.067  000.067: require('nio.util')
+024.157  000.111  000.111: require('vim.iter')
+024.179  000.241  000.063: require('nio.logger')
+024.185  000.277  000.036: require('nio.lsp')
+024.242  000.057  000.057: require('nio.process')
+024.256  000.773  000.050: require('nio')
+024.588  000.013  000.013: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+024.591  000.064  000.052: require('dapui.config.highlights')
+024.659  000.063  000.063: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+024.716  000.329  000.202: require('dapui.config')
+024.725  000.408  000.079: require('dapui.util')
+024.788  000.063  000.063: require('dapui.windows.layout')
+024.794  000.537  000.067: require('dapui.windows')
+024.849  000.054  000.054: require('dapui.controls')
+024.859  001.455  000.091: require('dapui')
+024.978  000.023  000.023: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+025.207  000.097  000.097: require('dapui.client.types')
+025.211  000.165  000.069: require('dapui.client')
+025.285  000.073  000.073: require('dap.breakpoints')
+025.338  000.043  000.043: require('dapui.client.lib')
+025.443  000.060  000.060: require('dapui.render.canvas')
+025.445  000.093  000.033: require('dapui.elements.breakpoints')
+025.520  000.044  000.044: require('dapui.components.breakpoints')
+025.603  000.042  000.042: require('dapui.elements.repl')
+025.639  000.033  000.033: require('dapui.elements.scopes')
+025.688  000.035  000.035: require('dapui.components.scopes')
+025.728  000.039  000.039: require('dapui.components.variables')
+025.866  000.120  000.120: require('dapui.elements.stacks')
+026.131  000.102  000.102: require('dapui.components.frames')
+026.136  000.221  000.119: require('dapui.components.threads')
+026.305  000.096  000.096: require('dapui.elements.watches')
+026.428  000.066  000.066: require('dapui.components.watches')
+026.502  000.023  000.023: require('dapui.elements.hover')
+026.535  000.023  000.023: require('dapui.components.hover')
+026.564  000.025  000.025: require('dapui.elements.console')
+026.658  000.039  000.039: require('nvim-dap-virtual-text')
+026.709  000.008  000.008: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+026.723  000.011  000.011: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+026.823  000.037  000.037: require('dap-go-ts')
+026.828  000.101  000.064: require('dap-go')
+026.842  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+026.845  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+026.930  000.022  000.022: sourcing /home/jsmitty/.local/share/nvim/lazy/nvim-web-devicons/plugin/nvim-web-devicons.vim
+026.932  000.035  000.013: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+026.935  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+026.938  000.000  000.000: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+027.149  000.059  000.059: require('nvim-web-devicons.filetypes')
+027.259  000.085  000.085: require('nvim-web-devicons.default.icons_by_filename')
+027.439  000.179  000.179: require('nvim-web-devicons.default.icons_by_file_extension')
+027.476  000.035  000.035: require('nvim-web-devicons.default.icons_by_operating_system')
+027.493  000.017  000.017: require('nvim-web-devicons.default.icons_by_desktop_environment')
+027.512  000.018  000.018: require('nvim-web-devicons.default.icons_by_window_manager')
+027.513  000.357  000.023: require('nvim-web-devicons.icons-default')
+027.667  000.727  000.311: require('nvim-web-devicons')
+029.081  000.003  000.003: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+029.086  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+029.191  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+029.194  000.000  000.000: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+029.405  000.018  000.018: require('toggleterm.lazy')
+029.423  000.017  000.017: require('toggleterm.constants')
+029.610  000.186  000.186: require('toggleterm.terminal')
+029.615  000.372  000.150: require('toggleterm')
+029.678  000.024  000.024: require('toggleterm.colors')
+029.698  000.019  000.019: require('toggleterm.utils')
+029.701  000.083  000.040: require('toggleterm.config')
+029.816  000.087  000.087: require('vim.version')
+030.713  000.044  000.044: require('toggleterm.commandline')
+030.727  000.004  000.004: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+030.728  001.531  000.941: require('plugins.configs.toggleterm')
+030.852  000.012  000.012: sourcing /home/jsmitty/.local/share/nvim/lazy/plenary.nvim/plugin/plenary.vim
+030.853  000.023  000.010: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+030.857  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+030.860  000.000  000.000: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+030.866  000.000  000.000: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+030.869  000.000  000.000: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+031.055  000.020  000.020: require('harpoon.utils')
+031.057  000.053  000.032: require('harpoon.logger')
+031.138  000.021  000.021: require('harpoon.autocmd')
+031.140  000.048  000.027: require('harpoon.buffer')
+031.169  000.028  000.028: require('harpoon.extensions')
+031.171  000.114  000.037: require('harpoon.ui')
+031.289  000.046  000.046: require('plenary.bit')
+031.322  000.032  000.032: require('plenary.functional')
+031.339  000.148  000.071: require('plenary.path')
+031.346  000.174  000.026: require('harpoon.data')
+031.377  000.030  000.030: require('harpoon.config')
+031.419  000.041  000.041: require('harpoon.list')
+033.325  002.455  002.042: require('harpoon')
+033.556  000.114  000.114: require('nvim-tree.commands')
+033.610  000.184  000.069: sourcing /home/jsmitty/.local/share/nvim/lazy/nvim-tree.lua/plugin/nvim-tree.lua
+033.612  000.194  000.010: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+033.616  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+033.619  000.000  000.000: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+033.864  000.138  000.138: require('nvim-tree.log')
+034.250  000.121  000.121: require('nvim-tree.notify')
+034.258  000.314  000.193: require('nvim-tree.events')
+034.365  000.106  000.106: require('nvim-tree.utils')
+034.372  000.507  000.087: require('nvim-tree.view')
+034.429  000.012  000.012: require('nvim-tree.core')
+034.462  000.017  000.017: require('nvim-tree.git.utils')
+034.476  000.013  000.013: require('nvim-tree.renderer.components.devicons')
+034.502  000.012  000.012: require('nvim-tree.classic')
+034.525  000.048  000.037: require('nvim-tree.node')
+034.537  000.108  000.030: require('nvim-tree.node.directory')
+034.551  000.014  000.014: require('nvim-tree.iterators.node-iterator')
+034.552  000.150  000.017: require('nvim-tree.actions.finders.find-file')
+034.567  000.014  000.014: require('nvim-tree.actions.finders.search-node')
+034.567  000.178  000.014: require('nvim-tree.actions.finders')
+034.609  000.015  000.015: require('nvim-tree.node.file')
+034.610  000.030  000.014: require('nvim-tree.actions.fs.create-file')
+034.641  000.015  000.015: require('nvim-tree.lib')
+034.665  000.011  000.011: require('nvim-tree.node.link')
+034.679  000.037  000.025: require('nvim-tree.node.directory-link')
+034.680  000.069  000.018: require('nvim-tree.actions.fs.remove-file')
+034.697  000.016  000.016: require('nvim-tree.actions.fs.rename-file')
+034.713  000.016  000.016: require('nvim-tree.actions.fs.trash')
+034.714  000.146  000.016: require('nvim-tree.actions.fs')
+034.756  000.016  000.016: require('nvim-tree.diagnostics')
+034.757  000.030  000.014: require('nvim-tree.actions.moves.item')
+034.769  000.012  000.012: require('nvim-tree.actions.moves.parent')
+034.782  000.012  000.012: require('nvim-tree.actions.moves.sibling')
+034.782  000.068  000.013: require('nvim-tree.actions.moves')
+034.811  000.015  000.015: require('nvim-tree.actions.node.file-popup')
+034.848  000.016  000.016: require('nvim-tree.renderer.components.full-name')
+034.850  000.039  000.023: require('nvim-tree.actions.node.open-file')
+034.863  000.012  000.012: require('nvim-tree.actions.node.run-command')
+034.877  000.014  000.014: require('nvim-tree.actions.node.system-open')
+034.888  000.011  000.011: require('nvim-tree.actions.node.buffer')
+034.889  000.106  000.016: require('nvim-tree.actions.node')
+034.923  000.014  000.014: require('nvim-tree.actions.root.change-dir')
+034.933  000.010  000.010: require('nvim-tree.actions.root.dir-up')
+034.934  000.045  000.021: require('nvim-tree.actions.root')
+034.970  000.011  000.011: require('nvim-tree.actions.tree.find-file')
+035.005  000.012  000.012: require('nvim-tree.actions.tree.modifiers.collapse')
+035.020  000.014  000.014: require('nvim-tree.actions.tree.modifiers.expand')
+035.020  000.050  000.024: require('nvim-tree.actions.tree.modifiers')
+035.031  000.010  000.010: require('nvim-tree.actions.tree.open')
+035.042  000.010  000.010: require('nvim-tree.actions.tree.toggle')
+035.053  000.010  000.010: require('nvim-tree.actions.tree.resize')
+035.053  000.119  000.027: require('nvim-tree.actions.tree')
+035.054  000.681  000.020: require('nvim-tree.actions')
+035.066  001.413  000.087: require('nvim-tree')
+035.084  000.013  000.013: require('nvim-tree.legacy')
+035.280  000.022  000.022: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+035.285  000.003  000.003: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+035.323  000.021  000.021: require('nvim-tree.keymap')
+035.348  000.025  000.025: require('nvim-tree.appearance')
+035.593  000.014  000.014: require('nvim-tree.buffers')
+035.630  000.017  000.017: require('nvim-tree.git.runner')
+035.648  000.017  000.017: require('nvim-tree.watcher')
+035.650  000.056  000.022: require('nvim-tree.git')
+035.676  000.014  000.014: require('nvim-tree.node.file-link')
+035.677  000.026  000.012: require('nvim-tree.node.factory')
+035.690  000.012  000.012: require('nvim-tree.node.root')
+035.715  000.010  000.010: require('nvim-tree.enum')
+035.716  000.026  000.016: require('nvim-tree.explorer.filters')
+035.734  000.017  000.017: require('nvim-tree.marks')
+035.752  000.017  000.017: require('nvim-tree.explorer.live-filter')
+035.767  000.015  000.015: require('nvim-tree.explorer.sorter')
+035.788  000.020  000.020: require('nvim-tree.actions.fs.clipboard')
+035.848  000.019  000.019: require('nvim-tree.renderer.decorator')
+035.850  000.032  000.013: require('nvim-tree.renderer.decorator.bookmarks')
+035.863  000.012  000.012: require('nvim-tree.renderer.decorator.copied')
+035.876  000.012  000.012: require('nvim-tree.renderer.decorator.cut')
+035.889  000.013  000.013: require('nvim-tree.renderer.decorator.diagnostics')
+035.916  000.026  000.026: require('nvim-tree.renderer.decorator.git')
+035.928  000.012  000.012: require('nvim-tree.renderer.decorator.hidden')
+035.943  000.014  000.014: require('nvim-tree.renderer.decorator.modified')
+035.966  000.022  000.022: require('nvim-tree.renderer.decorator.opened')
+035.994  000.027  000.027: require('nvim-tree.renderer.decorator.user')
+036.010  000.016  000.016: require('nvim-tree.renderer.components.padding')
+036.014  000.213  000.026: require('nvim-tree.renderer.builder')
+036.019  000.231  000.018: require('nvim-tree.renderer')
+036.025  000.475  000.041: require('nvim-tree.explorer')
+036.042  000.016  000.016: require('nvim-tree.explorer.watch')
+036.059  000.013  000.013: require('nvim-tree.renderer.components')
+036.085  000.024  000.024: require('nvim-tree.help')
+036.139  000.025  000.025: require('nvim-tree.appearance.hi-test')
+036.165  000.079  000.054: require('nvim-tree.api')
+036.188  002.566  000.462: require('plugins.configs.nvimtree')
+036.321  000.002  000.002: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+036.332  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+036.452  000.078  000.078: sourcing /home/jsmitty/.local/share/nvim/lazy/telescope.nvim/plugin/telescope.lua
+036.454  000.088  000.010: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+036.459  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+036.462  000.000  000.000: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+036.632  000.020  000.020: require('telescope._extensions')
+036.634  000.147  000.127: require('telescope')
+036.776  000.026  000.026: require('plenary.strings')
+036.803  000.026  000.026: require('telescope.deprecated')
+036.892  000.047  000.047: require('plenary.log')
+036.903  000.069  000.022: require('telescope.log')
+037.045  000.040  000.040: require('plenary.compat')
+037.049  000.101  000.061: require('plenary.job')
+037.072  000.022  000.022: require('telescope.state')
+037.080  000.177  000.054: require('telescope.utils')
+037.084  000.281  000.034: require('telescope.sorters')
+037.858  001.150  000.817: require('telescope.config')
+037.954  000.046  000.046: require('plenary.window.border')
+037.979  000.024  000.024: require('plenary.window')
+038.027  000.048  000.048: require('plenary.popup.utils')
+038.031  000.171  000.053: require('plenary.popup')
+038.068  000.035  000.035: require('telescope.pickers.scroller')
+038.093  000.025  000.025: require('telescope.actions.state')
+038.117  000.023  000.023: require('telescope.actions.utils')
+038.188  000.036  000.036: require('telescope.actions.mt')
+038.201  000.083  000.047: require('telescope.actions.set')
+038.258  000.035  000.035: require('telescope.config.resolve')
+038.260  000.059  000.024: require('telescope.pickers.entry_display')
+038.280  000.019  000.019: require('telescope.from_entry')
+038.413  001.779  000.213: require('telescope.actions')
+038.945  000.078  000.078: require('fzf_lib')
+038.948  000.119  000.041: require('telescope._extensions.fzf')
+038.951  002.487  000.443: require('plugins.configs.telescope')
+038.987  000.003  000.003: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+038.991  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+039.187  000.193  000.193: require('oil')
+039.243  000.043  000.043: require('oil.ringbuf')
+039.344  000.100  000.100: require('oil.config')
+040.581  001.006  001.006: require('vim.filetype')
+040.836  000.026  000.026: require('oil.log')
+040.842  000.066  000.040: require('oil.fs')
+040.893  000.012  000.012: require('oil.constants')
+040.911  000.068  000.056: require('oil.util')
+041.004  000.021  000.021: sourcing /home/jsmitty/.local/share/nvim/lazy/mason-tool-installer.nvim/plugin/mason-tool-installer.lua
+041.006  000.035  000.015: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+041.009  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+041.013  000.000  000.000: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+041.114  000.012  000.012: require('mason.version')
+041.119  000.105  000.093: require('mason-tool-installer')
+041.202  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+041.205  000.000  000.000: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+041.300  000.070  000.070: require('mason-lspconfig.settings')
+041.301  000.173  000.101: require('mason-lspconfig')
+041.776  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+041.780  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+041.976  000.024  000.024: require('auto-session.config')
+041.978  000.040  000.016: require('auto-session.logger')
+042.004  000.107  000.067: require('auto-session.lib')
+042.009  000.227  000.120: require('auto-session')
+042.282  000.028  000.028: require('auto-session.autocmds')
+042.327  000.019  000.019: require('auto-session.pickers.telescope')
+042.343  000.013  000.013: require('telescope._extensions.session-lens')
+042.483  000.002  000.002: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+042.487  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+042.676  000.012  000.012: require('luasnip.util.types')
+042.678  000.027  000.015: require('luasnip.util.ext_opts')
+042.728  000.011  000.011: require('luasnip.util.lazy_table')
+042.742  000.013  000.013: require('luasnip.extras.filetype_functions')
+042.746  000.049  000.024: require('luasnip.default_config')
+042.747  000.068  000.019: require('luasnip.session')
+042.748  000.177  000.081: require('luasnip.config')
+043.119  000.316  000.316: require('luasnip.util.vimversion')
+043.122  000.341  000.024: require('luasnip.util.util')
+043.191  000.011  000.011: require('luasnip.nodes.key_indexer')
+043.204  000.012  000.012: require('luasnip.util.feedkeys')
+043.206  000.083  000.060: require('luasnip.nodes.util')
+043.236  000.013  000.013: require('luasnip.session.snippet_collection.source')
+043.247  000.010  000.010: require('luasnip.util.table')
+043.258  000.011  000.011: require('luasnip.util.auto_table')
+043.261  000.055  000.021: require('luasnip.session.snippet_collection')
+043.302  000.012  000.012: require('luasnip.util.select')
+043.313  000.010  000.010: require('luasnip.util.time')
+043.451  000.178  000.156: require('luasnip.util._builtin_vars')
+043.507  000.246  000.068: require('luasnip.util.environ')
+043.524  000.016  000.016: require('luasnip.util.extend_decorator')
+043.564  000.024  000.024: require('luasnip.util.path')
+043.608  000.021  000.021: require('luasnip.util.log')
+043.610  000.045  000.024: require('luasnip.loaders.util')
+043.633  000.012  000.012: require('luasnip.loaders.data')
+043.663  000.030  000.030: require('luasnip.loaders.fs_watchers')
+043.665  000.140  000.029: require('luasnip.loaders')
+043.672  000.922  000.042: require('luasnip')
+043.698  001.194  000.095: sourcing /home/jsmitty/.local/share/nvim/lazy/LuaSnip/plugin/luasnip.lua
+043.700  001.203  000.010: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+043.725  000.012  000.012: sourcing /home/jsmitty/.local/share/nvim/lazy/LuaSnip/plugin/luasnip.vim
+043.726  000.021  000.009: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+043.728  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+043.732  000.000  000.000: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+043.770  000.012  000.012: require('luasnip.session.enqueueable_operations')
+043.846  000.010  000.010: require('luasnip.util.events')
+043.854  000.037  000.027: require('luasnip.nodes.node')
+043.890  000.035  000.035: require('luasnip.nodes.insertNode')
+043.916  000.026  000.026: require('luasnip.nodes.textNode')
+043.936  000.019  000.019: require('luasnip.util.mark')
+043.953  000.016  000.016: require('luasnip.util.pattern_tokenizer')
+043.965  000.012  000.012: require('luasnip.util.dict')
+044.067  000.004  000.004: require('jsregexp.core')
+044.068  000.025  000.021: require('luasnip-jsregexp')
+044.073  000.088  000.063: require('luasnip.util.jsregexp')
+044.074  000.107  000.020: require('luasnip.nodes.util.trig_engines')
+044.099  000.313  000.061: require('luasnip.nodes.snippet')
+044.166  000.023  000.023: require('luasnip.util.parser.neovim_ast')
+044.183  000.017  000.017: require('luasnip.util.str')
+044.204  000.019  000.019: require('luasnip.util.directed_graph')
+044.207  000.085  000.026: require('luasnip.util.parser.ast_utils')
+044.229  000.022  000.022: require('luasnip.nodes.functionNode')
+044.263  000.033  000.033: require('luasnip.nodes.choiceNode')
+044.303  000.040  000.040: require('luasnip.nodes.dynamicNode')
+044.318  000.014  000.014: require('luasnip.util.functions')
+044.320  000.221  000.028: require('luasnip.util.parser.ast_parser')
+044.363  000.042  000.042: require('luasnip.util.parser.neovim_parser')
+044.368  000.596  000.020: require('luasnip.util.parser')
+044.383  000.015  000.015: require('luasnip.nodes.snippetProxy')
+044.435  000.050  000.050: require('luasnip.util.jsonc')
+044.466  000.015  000.015: require('luasnip.nodes.duplicate')
+044.466  000.030  000.015: require('luasnip.loaders.snippet_cache')
+044.470  000.737  000.032: require('luasnip.loaders.from_vscode')
+045.802  000.041  000.041: require('luasnip.nodes.multiSnippet')
+046.758  000.003  000.003: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+046.765  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+046.849  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+046.853  000.000  000.000: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+047.070  000.039  000.039: require('fidget.spinner.patterns')
+047.072  000.061  000.023: require('fidget.spinner')
+047.127  000.032  000.032: require('fidget.health')
+047.128  000.055  000.023: require('fidget.options')
+047.132  000.149  000.032: require('fidget.progress.display')
+047.204  000.040  000.040: require('fidget.logger')
+047.356  000.074  000.074: require('vim.lsp.log')
+047.601  000.244  000.244: require('vim.lsp.protocol')
+047.744  000.141  000.141: require('vim.lsp.util')
+047.838  000.042  000.042: require('vim.lsp.sync')
+047.843  000.098  000.056: require('vim.lsp._changetracking')
+047.925  000.045  000.045: require('vim.lsp._transport')
+047.935  000.091  000.047: require('vim.lsp.rpc')
+047.978  000.772  000.123: require('vim.lsp')
+048.134  000.101  000.101: require('vim.lsp.completion')
+048.156  000.177  000.076: require('vim.lsp.handlers')
+048.159  001.027  000.037: require('fidget.progress.lsp')
+048.290  000.037  000.037: require('fidget.poll')
+048.292  000.078  000.041: require('fidget.notification.model')
+048.365  000.073  000.073: require('fidget.notification.window')
+048.408  000.042  000.042: require('fidget.notification.view')
+048.425  000.242  000.050: require('fidget.notification')
+048.427  000.267  000.025: require('fidget.progress.handle')
+048.442  001.489  000.046: require('fidget.progress')
+048.513  000.070  000.070: require('fidget.commands')
+048.554  000.022  000.022: require('fidget.integration.nvim-tree')
+048.575  000.020  000.020: require('fidget.integration.xcodebuild-nvim')
+048.576  000.063  000.021: require('fidget.integration')
+048.592  001.730  000.108: require('fidget')
+048.663  000.002  000.002: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+048.667  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+048.764  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+048.768  000.000  000.000: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+049.175  000.229  000.229: require('lualine_require')
+049.411  000.604  000.375: require('lualine')
+049.683  000.007  000.007: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+049.988  000.008  000.008: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+049.995  000.002  000.002: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+050.009  000.002  000.002: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+050.015  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+050.022  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+050.033  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+050.041  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+050.052  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+050.064  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+050.071  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+050.086  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+050.092  000.005  000.005: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+050.688  000.043  000.043: require('lualine.utils.mode')
+051.166  000.005  000.005: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.172  000.003  000.003: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.235  000.003  000.003: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.239  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.243  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.264  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.267  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.270  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.272  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.278  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.281  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.283  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.286  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.288  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.291  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.294  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.298  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.326  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.346  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.357  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.365  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.374  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.377  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.439  000.003  000.003: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.442  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.444  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.447  000.002  000.002: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.601  000.002  000.002: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.605  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.609  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.612  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.615  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.617  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.620  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.624  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.627  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.629  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.632  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.635  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.637  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.640  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.643  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.646  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.648  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.650  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.662  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.664  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.667  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.671  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.673  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.676  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.678  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.680  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.683  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.696  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.744  000.005  000.005: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.756  000.003  000.003: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.764  000.007  000.007: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.769  000.003  000.003: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.772  000.002  000.002: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+051.782  003.012  002.255: require('plugins.configs.lualine')
+052.005  000.157  000.157: require('lspconfig.util')
+052.014  000.192  000.035: sourcing /home/jsmitty/.local/share/nvim/lazy/nvim-lspconfig/plugin/lspconfig.lua
+052.016  000.203  000.010: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+052.018  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+052.022  000.000  000.000: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+052.078  000.017  000.017: require('cmp_nvim_lsp.source')
+052.079  000.035  000.018: require('cmp_nvim_lsp')
+052.102  000.078  000.043: require('plugins.configs.lsp')
+052.174  000.016  000.016: sourcing /usr/share/nvim/runtime/plugin/editorconfig.lua
+052.175  000.024  000.008: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+052.207  000.025  000.025: sourcing /usr/share/nvim/runtime/plugin/man.lua
+052.208  000.031  000.006: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+052.418  000.081  000.081: sourcing /usr/share/nvim/runtime/pack/dist/opt/matchit/plugin/matchit.vim
+052.423  000.209  000.128: sourcing /usr/share/nvim/runtime/plugin/matchit.vim
+052.424  000.214  000.005: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+052.484  000.053  000.053: sourcing /usr/share/nvim/runtime/plugin/matchparen.vim
+052.485  000.059  000.005: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+052.495  000.003  000.003: sourcing /usr/share/nvim/runtime/plugin/netrwPlugin.vim
+052.496  000.009  000.006: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+052.531  000.029  000.029: sourcing /usr/share/nvim/runtime/plugin/osc52.lua
+052.532  000.034  000.005: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+052.592  000.055  000.055: sourcing /usr/share/nvim/runtime/plugin/rplugin.vim
+052.593  000.060  000.005: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+052.622  000.023  000.023: sourcing /usr/share/nvim/runtime/plugin/shada.vim
+052.623  000.028  000.005: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+052.636  000.006  000.006: sourcing /usr/share/nvim/runtime/plugin/spellfile.vim
+052.637  000.012  000.006: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+052.742  000.026  000.026: sourcing /home/jsmitty/.local/share/nvim/lazy/cmp-nvim-lsp/after/plugin/cmp_nvim_lsp.lua
+052.743  000.035  000.009: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+053.026  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.local/share/nvim/lazy/cmp_luasnip/after/plugin/cmp_luasnip.lua:0
+053.029  000.000  000.000: sourcing nvim_exec2() called at /home/jsmitty/.local/share/nvim/lazy/cmp_luasnip/after/plugin/cmp_luasnip.lua:0
+053.112  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.local/share/nvim/lazy/cmp_luasnip/after/plugin/cmp_luasnip.lua:0
+053.115  000.000  000.000: sourcing nvim_exec2() called at /home/jsmitty/.local/share/nvim/lazy/cmp_luasnip/after/plugin/cmp_luasnip.lua:0
+053.254  000.108  000.108: require('cmp.utils.api')
+053.282  000.013  000.013: require('cmp.types.cmp')
+053.317  000.017  000.017: require('cmp.utils.misc')
+053.323  000.040  000.022: require('cmp.types.lsp')
+053.334  000.011  000.011: require('cmp.types.vim')
+053.335  000.080  000.016: require('cmp.types')
+053.347  000.012  000.012: require('cmp.utils.highlight')
+053.371  000.011  000.011: require('cmp.utils.debug')
+053.374  000.026  000.015: require('cmp.utils.autocmd')
+053.559  000.004  000.004: sourcing nvim_exec2() called at /home/jsmitty/.local/share/nvim/lazy/nvim-cmp/plugin/cmp.lua:0
+053.560  000.431  000.201: sourcing /home/jsmitty/.local/share/nvim/lazy/nvim-cmp/plugin/cmp.lua
+053.562  000.439  000.008: sourcing nvim_exec2() called at /home/jsmitty/.local/share/nvim/lazy/cmp_luasnip/after/plugin/cmp_luasnip.lua:0
+053.564  000.001  000.001: sourcing nvim_exec2() called at /home/jsmitty/.local/share/nvim/lazy/cmp_luasnip/after/plugin/cmp_luasnip.lua:0
+053.574  000.000  000.000: sourcing nvim_exec2() called at /home/jsmitty/.local/share/nvim/lazy/cmp_luasnip/after/plugin/cmp_luasnip.lua:0
+053.678  000.022  000.022: require('cmp.utils.char')
+053.681  000.039  000.016: require('cmp.utils.str')
+053.723  000.011  000.011: require('cmp.utils.buffer')
+053.727  000.032  000.022: require('cmp.utils.keymap')
+053.728  000.046  000.014: require('cmp.utils.feedkeys')
+053.778  000.017  000.017: require('cmp.config.mapping')
+053.789  000.011  000.011: require('cmp.utils.cache')
+053.822  000.016  000.016: require('cmp.config.compare')
+053.834  000.011  000.011: require('cmp.config.window')
+053.834  000.044  000.017: require('cmp.config.default')
+053.841  000.096  000.024: require('cmp.config')
+053.846  000.117  000.021: require('cmp.utils.async')
+053.869  000.010  000.010: require('cmp.utils.pattern')
+053.870  000.024  000.014: require('cmp.context')
+053.938  000.029  000.029: require('cmp.utils.snippet')
+053.951  000.013  000.013: require('cmp.matcher')
+054.028  000.140  000.098: require('cmp.entry')
+054.031  000.160  000.020: require('cmp.source')
+054.059  000.012  000.012: require('cmp.utils.event')
+054.099  000.010  000.010: require('cmp.utils.options')
+054.101  000.028  000.018: require('cmp.utils.window')
+054.102  000.042  000.014: require('cmp.view.docs_view')
+054.127  000.025  000.025: require('cmp.view.custom_entries_view')
+054.146  000.018  000.018: require('cmp.view.wildmenu_entries_view')
+054.166  000.020  000.020: require('cmp.view.native_entries_view')
+054.188  000.021  000.021: require('cmp.view.ghost_text_view')
+054.192  000.161  000.023: require('cmp.view')
+054.446  000.828  000.281: require('cmp.core')
+054.498  000.014  000.014: require('cmp.config.sources')
+054.517  000.921  000.079: require('cmp')
+054.751  001.175  000.253: require('plugins.configs.cmp')
+054.754  001.981  000.364: require('cmp')
+054.778  000.024  000.024: require('cmp_luasnip')
+054.797  002.040  000.035: sourcing /home/jsmitty/.local/share/nvim/lazy/cmp_luasnip/after/plugin/cmp_luasnip.lua
+054.800  002.048  000.008: sourcing nvim_exec2() called at /home/jsmitty/.config/nvim/init.lua:0
+054.819  044.354  014.039: require('plugins.lazy_setup')
+054.820  050.229  000.349: sourcing /home/jsmitty/.config/nvim/init.lua
+054.823  000.604: sourcing vimrc file(s)
+054.911  000.011  000.011: sourcing /usr/share/nvim/runtime/filetype.lua
+055.018  000.028  000.028: sourcing /usr/share/nvim/runtime/syntax/synload.vim
+055.049  000.112  000.084: sourcing /usr/share/nvim/runtime/syntax/syntax.vim
+055.053  000.106: inits 3
+056.029  000.976: reading ShaDa
+056.105  000.033  000.033: require('luasnip.loaders.from_lua')
+056.131  000.024  000.024: require('luasnip.loaders.from_snipmate')
+056.140  000.054: opening buffers
+056.191  000.051: BufEnter autocommands
+056.192  000.001: editing files in windows
+056.269  000.026  000.026: require('dap.ui')
+056.274  000.065  000.039: require('dap.repl')
+056.276  000.019: --- NVIM STARTED ---
+

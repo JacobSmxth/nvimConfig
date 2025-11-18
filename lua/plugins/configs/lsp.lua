@@ -8,12 +8,14 @@ local function on_attach(_, bufnr)
     vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, silent = true, desc = desc })
   end
 
-  map("n", "gd", vim.lsp.buf.definition, "LSP: Go to Definition")
-  map("n", "gr", vim.lsp.buf.references, "LSP: References")
-  map("n", "K", vim.lsp.buf.hover, "LSP: Hover")
-  map("n", "<leader>rn", vim.lsp.buf.rename, "LSP: Rename")
-
-  map("n", "<leader>ca", vim.lsp.buf.code_action, "LSP: Code Action")
+  map("n", "gd", vim.lsp.buf.definition, "Go to definition")
+  map("n", "gD", vim.lsp.buf.declaration, "Go to declaration")
+  map("n", "gr", vim.lsp.buf.references, "Go to references")
+  map("n", "gI", vim.lsp.buf.implementation, "Go to implementation")
+  map("n", "gh", vim.lsp.buf.hover, "Hover documentation")
+  map("n", "<leader>D", vim.lsp.buf.type_definition, "Type definition")
+  map("n", "<leader>rn", vim.lsp.buf.rename, "Rename symbol")
+  map("n", "<leader>ca", vim.lsp.buf.code_action, "Code action")
 end
 
 -- Helper to setup LSP server

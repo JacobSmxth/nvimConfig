@@ -12,20 +12,20 @@ require("lazy").setup({
         config = {
           header = {
             "",
-            "",
-            "   ▄████▄   ▒█████   ▓█████▄  ██▓ ███▄    █   ▄████",
-            "  ▒██▀ ▀█  ▒██▒  ██▒ ▒██▀ ██▌▓██▒ ██ ▀█   █  ██▒ ▀█▒",
-            "  ▒▓█    ▄ ▒██░  ██▒ ░██   █▌▒██▒▓██  ▀█ ██▒▒██░▄▄▄░",
-            "  ▒▓▓▄ ▄██▒▒██   ██░ ░▓█▄   ▌░██░▓██▒  ▐▌██▒░▓█  ██▓",
-            "  ▒ ▓███▀ ░░ ████▓▒░ ░▒████▓ ░██░▒██░   ▓██░░▒▓███▀▒",
-            "  ░ ░▒ ▒  ░░ ▒░▒░▒░  ▒▒▓  ▒ ░▓  ░ ▒░   ▒ ▒   ░▒   ▒ ",
-            "    ░  ▒     ░ ▒ ▒░  ░ ▒  ▒  ▒ ░░ ░░   ░ ▒░   ░   ░ ",
-            "  ░        ░ ░ ░ ▒   ░ ░  ░  ▒ ░   ░   ░ ░  ░ ░   ░ ",
-            "  ░ ░          ░ ░   ░  ░   ░     ░           ░   ",
-            "   ░                        ░                      ",
-            "              -- Coding for Christ --             ",
-            "",
-            "",
+            " ____       _____    ____   ____  _________________  ____   ____  _____      _____        ______  ",
+            "|    |  ___|\\    \\  |    | |    |/                 \\|    | |    ||\\    \\    /    /|   ___|\\     \\ ",
+            "|    | /    /\\    \\ |    | |    |\\______     ______|/    | |    || \\    \\  /    / |  |    |\\     \\",
+            "|    ||    |  |    ||    |_|    |   \\( /    /  )/   |    |_|    ||  \\____\\/    /  /  |    |/____/|",
+            "|    ||    |  |____||    .-.    |    ' |   |   '    |    .-.    | \\ |    /    /  /___|    \\|   | |",
+            "|    ||    |   ____ |    | |    |      |   |        |    | |    |  \\|___/    /  /|    \\    \\___|/ ",
+            "|    ||    |  |    ||    | |    |     /   //        |    | |    |      /    /  / |    |\\     \\    ",
+            "|____||\\ ___\\/    /||____| |____|    /___//         |____| |____|     /____/  /  |\\ ___\\|_____|   ",
+            "|    || |   /____/ ||    | |    |   |`   |          |    | |    |    |`    | /   | |    |     |   ",
+            "|____| \\|___|    | /|____| |____|   |____|          |____| |____|    |_____|/     \\|____|_____|   ",
+            "  \\(     \\( |____|/   \\(     )/       \\(              \\(     )/         )/           \\(    )/     ",
+            "   '      '   )/       '     '         '               '     '          '             '    '      ",
+            "              '                                                                                   ",
+            "                               For the glory of God in all things                                 ",
             "",
           },
           center = {
@@ -36,7 +36,7 @@ require("lazy").setup({
             { icon = " ", desc = "Settings      ", key = "s", action = "edit $MYVIMRC" },
             { icon = " ", desc = "Quit Neovim   ", key = "q", action = "qa" },
           },
-          footer = { "God is good. All the time." },
+          footer = { "Commit thy works unto the Lord, and thy thoughts shall be established. - Proverbs 16:3 KJV" },
         },
       })
 
@@ -269,6 +269,46 @@ require("lazy").setup({
     build = "make",
   },
 
+  -- Undo tree with telescope
+  {
+    "debugloop/telescope-undo.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim" },
+    keys = {
+      { "<leader>u", "<cmd>Telescope undo<cr>", desc = "Undo tree" },
+    },
+    config = function()
+      require("telescope").load_extension("undo")
+    end,
+  },
+
+  -- Project session management
+  {
+    "rmagatti/auto-session",
+    config = function()
+      require("auto-session").setup({
+        log_level = "error",
+        auto_session_suppress_dirs = { "~/", "~/Downloads", "/" },
+        auto_session_use_git_branch = true,
+        session_lens = {
+          prompt_title = "Sessions",
+        },
+      })
+
+      vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+
+      local group = vim.api.nvim_create_augroup("AutoSessionMessages", { clear = true })
+      vim.api.nvim_create_autocmd("User", {
+        group = group,
+        pattern = "AutoSessionRestored",
+        callback = function()
+          vim.defer_fn(function()
+            vim.cmd("echon ''")
+          end, 2000)
+        end,
+      })
+    end,
+  },
+
   {
     "nvim-lua/plenary.nvim",
   },
@@ -281,6 +321,110 @@ require("lazy").setup({
     end,
   },
 
+  -- Oil.nvim (file explorer as a buffer)
+  {
+    "stevearc/oil.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      require("oil").setup({
+        default_file_explorer = false,
+        columns = {
+          "icon",
+          "permissions",
+          "size",
+          "mtime",
+        },
+        buf_options = {
+          buflisted = false,
+          bufhidden = "hide",
+        },
+        win_options = {
+          wrap = false,
+          signcolumn = "no",
+          cursorcolumn = false,
+          foldcolumn = "0",
+          spell = false,
+          list = false,
+          conceallevel = 3,
+          concealcursor = "nvic",
+        },
+        delete_to_trash = false,
+        skip_confirm_for_simple_edits = false,
+        prompt_save_on_select_new_entry = true,
+        cleanup_delay_ms = 2000,
+        keymaps = {
+          ["g?"] = "actions.show_help",
+          ["<CR>"] = "actions.select",
+          ["<C-v>"] = "actions.select_vsplit",
+          ["<C-x>"] = "actions.select_split",
+          ["<C-t>"] = "actions.select_tab",
+          ["<C-p>"] = "actions.preview",
+          ["<C-c>"] = "actions.close",
+          ["<C-r>"] = "actions.refresh",
+          ["-"] = "actions.parent",
+          ["_"] = "actions.open_cwd",
+          ["`"] = "actions.cd",
+          ["~"] = "actions.tcd",
+          ["gs"] = "actions.change_sort",
+          ["gx"] = "actions.open_external",
+          ["g."] = "actions.toggle_hidden",
+          ["g\\"] = "actions.toggle_trash",
+        },
+        use_default_keymaps = true,
+        view_options = {
+          show_hidden = false,
+          is_hidden_file = function(name, bufnr)
+            return vim.startswith(name, ".")
+          end,
+          is_always_hidden = function(name, bufnr)
+            return false
+          end,
+          sort = {
+            { "type", "asc" },
+            { "name", "asc" },
+          },
+        },
+        float = {
+          padding = 2,
+          max_width = 90,
+          max_height = 30,
+          border = "rounded",
+          win_options = {
+            winblend = 0,
+          },
+        },
+        preview = {
+          max_width = 0.9,
+          min_width = { 40, 0.4 },
+          width = nil,
+          max_height = 0.9,
+          min_height = { 5, 0.1 },
+          height = nil,
+          border = "rounded",
+          win_options = {
+            winblend = 0,
+          },
+        },
+        progress = {
+          max_width = 0.9,
+          min_width = { 40, 0.4 },
+          width = nil,
+          max_height = { 10, 0.9 },
+          min_height = { 5, 0.1 },
+          height = nil,
+          border = "rounded",
+          minimized_border = "none",
+          win_options = {
+            winblend = 0,
+          },
+        },
+      })
+
+      vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+      vim.keymap.set("n", "<leader>-", require("oil").toggle_float, { desc = "Open Oil (float)" })
+    end,
+  },
+
   -- Git signs
   {
     "lewis6991/gitsigns.nvim",
@@ -288,6 +432,15 @@ require("lazy").setup({
     config = function()
       require("plugins.configs.gitsigns")
     end,
+  },
+
+  -- Lazygit integration
+  {
+    "kdheepak/lazygit.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    keys = {
+      { "<leader>gg", "<cmd>LazyGit<cr>", desc = "Open LazyGit" },
+    },
   },
 
   -- Auto pairs
@@ -320,6 +473,28 @@ require("lazy").setup({
       keys = "etovxqpdygfblzhckisuran",
       jump_on_sole_occurrence = true,
     },
+  },
+
+  -- Harpoon (quick file navigation)
+  {
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      local harpoon = require("harpoon")
+      harpoon:setup()
+
+      vim.keymap.set("n", "<leader>ha", function() harpoon:list():add() end, { desc = "Harpoon add file" })
+      vim.keymap.set("n", "<leader>hh", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Harpoon menu" })
+
+      vim.keymap.set("n", "<leader>h1", function() harpoon:list():select(1) end, { desc = "Harpoon file 1" })
+      vim.keymap.set("n", "<leader>h2", function() harpoon:list():select(2) end, { desc = "Harpoon file 2" })
+      vim.keymap.set("n", "<leader>h3", function() harpoon:list():select(3) end, { desc = "Harpoon file 3" })
+      vim.keymap.set("n", "<leader>h4", function() harpoon:list():select(4) end, { desc = "Harpoon file 4" })
+
+      vim.keymap.set("n", "<leader>hn", function() harpoon:list():next() end, { desc = "Harpoon next" })
+      vim.keymap.set("n", "<leader>hp", function() harpoon:list():prev() end, { desc = "Harpoon prev" })
+    end,
   },
 
   -- Indent guides
@@ -361,12 +536,81 @@ require("lazy").setup({
     "derektata/lorem.nvim",
   },
 
+  -- Markdown preview
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
+    ft = "markdown",
+    opts = {
+      heading = {
+        enabled = true,
+        sign = true,
+        icons = { "󰲡 ", "󰲣 ", "󰲥 ", "󰲧 ", "󰲩 ", "󰲫 " },
+      },
+      code = {
+        enabled = true,
+        sign = true,
+        style = "full",
+        width = "block",
+        left_pad = 2,
+        right_pad = 2,
+      },
+      bullet = {
+        enabled = true,
+        icons = { "●", "○", "◆", "◇" },
+      },
+    },
+  },
+
+  -- REST client
+  {
+    "mistweaverco/kulala.nvim",
+    ft = "http",
+    keys = {
+      { "<leader>kr", "<cmd>lua require('kulala').run()<cr>", desc = "Run request" },
+      { "<leader>kt", "<cmd>lua require('kulala').toggle_view()<cr>", desc = "Toggle headers/body" },
+      { "<leader>kc", "<cmd>lua require('kulala').copy()<cr>", desc = "Copy as cURL" },
+    },
+    config = function()
+      require("kulala").setup()
+    end,
+  },
+
   -- Treesitter context (sticky scroll)
   {
     "nvim-treesitter/nvim-treesitter-context",
     event = { "BufReadPost", "BufNewFile" },
     opts = {
       max_lines = 3,
+    },
+  },
+
+  -- Code outline
+  {
+    "stevearc/aerial.nvim",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons",
+    },
+    keys = {
+      { "<leader>a", "<cmd>AerialToggle<cr>", desc = "Toggle code outline" },
+    },
+    opts = {
+      layout = {
+        max_width = { 40, 0.2 },
+        width = nil,
+        min_width = 20,
+      },
+      attach_mode = "global",
+      backends = { "lsp", "treesitter", "markdown", "man" },
+      show_guides = true,
+      filter_kind = false,
+      guides = {
+        mid_item = "├─",
+        last_item = "└─",
+        nested_top = "│ ",
+        whitespace = "  ",
+      },
     },
   },
 
@@ -423,17 +667,13 @@ require("lazy").setup({
         { "<leader>f", group = "Find (Telescope)" },
         { "<leader>b", group = "Buffers" },
         { "<leader>g", group = "Git" },
+        { "<leader>h", group = "Harpoon" },
+        { "<leader>k", group = "Kulala (REST)" },
         { "<leader>l", group = "LSP" },
-        { "<leader>t", group = "Terminal/Toggle" },
         { "<leader>x", group = "Trouble/Diagnostics" },
         { "<leader>w", group = "Window" },
         { "<leader>o", group = "Options/Other" },
         { "<leader>d", group = "Debug (DAP)" },
-
-        -- Filetype-adaptive code/compile group (changes based on current file)
-        -- In C/C++: compile, run, debug, valgrind, make
-        -- In Python: run, test, lint, format, venv
-        -- In Java: compile, run, gradle, test
         { "<leader>c", group = "Code/Compile (filetype)" },
 
         -- Common LSP actions
@@ -450,28 +690,26 @@ require("lazy").setup({
         { "<leader>ff", desc = "Find Files" },
         { "<leader>fg", desc = "Find in Files (Grep)" },
         { "<leader>fb", desc = "Find Buffers" },
+        { "<leader>fs", desc = "Find Sessions" },
         { "<leader>fh", desc = "Find Help" },
         { "<leader>fo", desc = "Find Old Files" },
         { "<leader>fc", desc = "Find Commands" },
         { "<leader>fk", desc = "Find Keymaps" },
-        { "<leader>fm", desc = "Find Marks" },
+        { "<leader>fm", desc = "Find Man Pages" },
 
         -- Buffer operations
         { "<leader>bd", desc = "Delete Buffer" },
         { "<leader>bn", desc = "Next Buffer" },
         { "<leader>bp", desc = "Previous Buffer" },
 
-        -- Terminal
-        { "<leader>tt", desc = "Toggle Terminal" },
-        { "<leader>tf", desc = "Toggle Float Terminal" },
-        { "<leader>th", desc = "Toggle Horizontal Terminal" },
-        { "<leader>tv", desc = "Toggle Vertical Terminal" },
 
-        -- Tree
+        -- Tree/Outline
         { "<leader>e", desc = "Toggle File Explorer" },
+        { "<leader>a", desc = "Toggle Code Outline" },
 
         -- Other
-        { "<leader>h", desc = "Clear Highlights" },
+        { "<leader>u", desc = "Undo Tree" },
+        { "<leader>/", desc = "Fuzzy Find in Buffer" },
         { "<leader>oi", desc = "Organize Imports (Java)" },
       })
     end,
