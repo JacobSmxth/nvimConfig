@@ -253,11 +253,6 @@ Select inside and jump to end:
 - Vertical splits open right
 - Horizontal splits open below
 
-### Performance
-- Update time: 250ms
-- Timeout: 300ms
-- Lazy loading for all plugins
-
 ---
 
 ## Auto-Commands
