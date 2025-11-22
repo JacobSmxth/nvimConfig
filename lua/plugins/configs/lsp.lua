@@ -3,7 +3,7 @@
 local caps_ok, cmp_caps = pcall(require, "cmp_nvim_lsp")
 local capabilities = caps_ok and cmp_caps.default_capabilities() or vim.lsp.protocol.make_client_capabilities()
 
-local function on_attach(_, bufnr)
+local function on_attach(client, bufnr)
   local map = function(mode, lhs, rhs, desc)
     vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, silent = true, desc = desc })
   end
@@ -16,6 +16,22 @@ local function on_attach(_, bufnr)
   map("n", "<leader>D", vim.lsp.buf.type_definition, "Type definition")
   map("n", "<leader>rn", vim.lsp.buf.rename, "Rename symbol")
   map("n", "<leader>ca", vim.lsp.buf.code_action, "Code action")
+  map("n", "<C-k>", vim.lsp.buf.signature_help, "Signature help")
+  map("i", "<C-k>", vim.lsp.buf.signature_help, "Signature help")
+
+  -- Enable inlay hints if supported
+  if client.server_capabilities.inlayHintProvider then
+    vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+  end
+
+  -- Enable code lens if supported
+  if client.server_capabilities.codeLensProvider then
+    vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+      buffer = bufnr,
+      callback = vim.lsp.codelens.refresh,
+    })
+    map("n", "<leader>cl", vim.lsp.codelens.run, "Run code lens")
+  end
 end
 
 -- Helper to setup LSP server
@@ -35,44 +51,72 @@ setup_lsp("clangd", {
   root_markers = { ".clangd", ".clang-tidy", ".clang-format", "compile_commands.json", "compile_flags.txt", "configure.ac", ".git" },
 })
 
--- Gopls (Go)
-if vim.fn.executable("gopls") == 1 then
-  setup_lsp("gopls", {
-    cmd = { "gopls" },
-    filetypes = { "go", "gomod", "gowork", "gotmpl" },
-    root_markers = { "go.work", "go.mod", ".git" },
-  })
-end
+-- C# (OmniSharp)
+setup_lsp("omnisharp", {
+  cmd = { "omnisharp" },
+  filetypes = { "cs" },
+  root_markers = { "*.sln", "*.csproj", "omnisharp.json", "function.json", ".git" },
+})
 
--- Pyright (Python)
+-- Python (Pyright)
 setup_lsp("pyright", {
   cmd = { "pyright-langserver", "--stdio" },
   filetypes = { "python" },
   root_markers = { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", "pyrightconfig.json", ".git" },
 })
 
--- TypeScript
+-- Go (Gopls)
+setup_lsp("gopls", {
+  cmd = { "gopls" },
+  filetypes = { "go", "gomod", "gowork", "gotmpl" },
+  root_markers = { "go.work", "go.mod", ".git" },
+  settings = {
+    gopls = {
+      analyses = {
+        unusedparams = true,
+      },
+      staticcheck = true,
+      gofumpt = true,
+    },
+  },
+})
+
+-- TypeScript/JavaScript
 setup_lsp("ts_ls", {
   cmd = { "typescript-language-server", "--stdio" },
   filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
   root_markers = { "tsconfig.json", "jsconfig.json", "package.json", ".git" },
 })
 
--- Rust Analyzer
-setup_lsp("rust_analyzer", {
-  cmd = { "rust-analyzer" },
-  filetypes = { "rust" },
-  root_markers = { "Cargo.toml", "rust-project.json", ".git" },
+-- Lua
+setup_lsp("lua_ls", {
+  cmd = { "lua-language-server" },
+  filetypes = { "lua" },
+  root_markers = { ".luarc.json", ".luarc.jsonc", ".luacheckrc", ".stylua.toml", "stylua.toml", "selene.toml", "selene.yml", ".git" },
   settings = {
-    ["rust-analyzer"] = {
-      cargo = {
-        allFeatures = true,
+    Lua = {
+      runtime = {
+        version = "LuaJIT",
       },
-      checkOnSave = {
-        command = "clippy",
+      diagnostics = {
+        globals = { "vim" },
+      },
+      workspace = {
+        library = vim.api.nvim_get_runtime_file("", true),
+        checkThirdParty = false,
+      },
+      telemetry = {
+        enable = false,
       },
     },
   },
+})
+
+-- Bash/Zsh
+setup_lsp("bashls", {
+  cmd = { "bash-language-server", "start" },
+  filetypes = { "sh", "bash", "zsh" },
+  root_markers = { ".git" },
 })
 
 -- HTML

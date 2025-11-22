@@ -13,8 +13,18 @@ o.tabstop = 2
 o.softtabstop = 2
 o.smartindent = true
 
--- Disable mouse (no scroll-only mode available)
-o.mouse = ""
+-- Mouse configuration (controlled by .mouse file)
+local mouse_file = vim.fn.stdpath("config") .. "/.mouse"
+local mouse_enabled = false
+
+if vim.fn.filereadable(mouse_file) == 1 then
+  local content = vim.fn.readfile(mouse_file)[1]
+  if content and content:lower():match("^%s*true%s*$") then
+    mouse_enabled = true
+  end
+end
+
+o.mouse = mouse_enabled and "a" or ""
 
 -- System clipboard
 o.clipboard = "unnamedplus"
@@ -65,6 +75,9 @@ o.pumheight = 10
 o.backup = false
 o.writebackup = false
 o.swapfile = false
+
+-- Allow hiding modified buffers
+o.hidden = true
 
 -- Simple statusline
 o.statusline = "%#StatusLine# %{toupper(mode())} %#StatusLineNC#| %f %m %= %l:%c | %Y "

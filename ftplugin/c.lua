@@ -1,3 +1,8 @@
+-- Only run for c files
+if vim.bo.filetype ~= "c" then
+  return
+end
+
 local map = vim.keymap.set
 local opts = { buffer = true, silent = true }
 

@@ -1,6 +1,38 @@
 -- Plugin setup
 
 require("lazy").setup({
+  -- Colorschemes
+  {
+    "sainnhe/gruvbox-material",
+    priority = 1000,
+  },
+
+  {
+    "ellisonleao/gruvbox.nvim",
+    priority = 1000,
+  },
+
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000,
+  },
+
+  {
+    "EdenEast/nightfox.nvim",
+    priority = 1000,
+  },
+
+  {
+    "rebelot/kanagawa.nvim",
+    priority = 1000,
+  },
+
+  {
+    "folke/tokyonight.nvim",
+    priority = 1000,
+  },
+
   -- Dashboard
   {
     "nvimdev/dashboard-nvim",
@@ -79,21 +111,44 @@ require("lazy").setup({
     config = function()
       require("mason-tool-installer").setup({
         ensure_installed = {
-          "jdtls",
-          "clangd",
-          "pyright",
-          "typescript-language-server",
-          "rust-analyzer",
-          "google-java-format",
-          "gopls",
-          "delve",
-          "gofumpt",
-          "goimports",
-          "html-lsp",
-          "css-lsp",
-          "emmet-ls",
-          "prettier",
-          "eslint_d",
+          -- LSP Servers
+          "jdtls",                      -- Java
+          "clangd",                     -- C/C++
+          "omnisharp",                  -- C#
+          "gopls",                      -- Go
+          "pyright",                    -- Python
+          "typescript-language-server", -- TypeScript/JavaScript
+          "html-lsp",                   -- HTML
+          "css-lsp",                    -- CSS/SCSS
+          "emmet-ls",                   -- Emmet
+          "lua-language-server",        -- Lua
+          "bash-language-server",       -- Bash/Zsh
+
+          -- Formatters
+          "google-java-format",         -- Java
+          "clang-format",               -- C/C++
+          "csharpier",                  -- C#
+          "gofumpt",                    -- Go
+          "goimports",                  -- Go
+          "black",                      -- Python
+          "isort",                      -- Python
+          "prettier",                   -- JS/TS/HTML/CSS/SCSS
+          "eslint_d",                   -- JS/TS linting
+          "stylua",                     -- Lua
+
+          -- Linters
+          "ruff",                       -- Python
+          "shellcheck",                 -- Bash/Zsh
+          "markdownlint",               -- Markdown
+
+          -- Debuggers (DAP)
+          "java-debug-adapter",         -- Java
+          "java-test",                  -- Java testing
+          "codelldb",                   -- C/C++
+          "netcoredbg",                 -- C#
+          "delve",                      -- Go
+          "debugpy",                    -- Python
+          "js-debug-adapter",           -- JavaScript/TypeScript
         },
         auto_update = false,
         run_on_start = true,
@@ -147,18 +202,25 @@ require("lazy").setup({
       require("conform").setup({
         formatters_by_ft = {
           java = { "google-java-format" },
+          c = { "clang-format" },
+          cpp = { "clang-format" },
+          cs = { "csharpier" },
+          go = { "goimports", "gofumpt" },
           python = { "isort", "black" },
           javascript = { "prettier", "eslint_d" },
           typescript = { "prettier", "eslint_d" },
           javascriptreact = { "prettier", "eslint_d" },
           typescriptreact = { "prettier", "eslint_d" },
-          json = { "prettier" },
-          yaml = { "prettier" },
-          markdown = { "prettier" },
           html = { "prettier" },
           css = { "prettier" },
           scss = { "prettier" },
-          go = { "goimports", "gofumpt" },
+          json = { "prettier" },
+          yaml = { "prettier" },
+          markdown = { "prettier" },
+          lua = { "stylua" },
+          sh = { "shellcheck" },
+          bash = { "shellcheck" },
+          zsh = { "shellcheck" },
         },
         formatters = {
           ["google-java-format"] = {
@@ -166,6 +228,15 @@ require("lazy").setup({
           },
         },
       })
+    end,
+  },
+
+  -- Codeium AI completion
+  {
+    "Exafunction/codeium.vim",
+    event = "BufEnter",
+    config = function()
+      require("plugins.configs.codeium")
     end,
   },
 
@@ -278,6 +349,30 @@ require("lazy").setup({
     },
     config = function()
       require("telescope").load_extension("undo")
+      require("telescope").setup({
+        extensions = {
+          undo = {
+            use_delta = false,
+            side_by_side = false,
+            layout_strategy = "vertical",
+            layout_config = {
+              preview_height = 0.8,
+            },
+            mappings = {
+              i = {
+                ["<CR>"] = require("telescope-undo.actions").restore,
+                ["<C-y>"] = require("telescope-undo.actions").yank_additions,
+                ["<C-Y>"] = require("telescope-undo.actions").yank_deletions,
+              },
+              n = {
+                ["<CR>"] = require("telescope-undo.actions").restore,
+                ["<C-y>"] = require("telescope-undo.actions").yank_additions,
+                ["<C-Y>"] = require("telescope-undo.actions").yank_deletions,
+              },
+            },
+          },
+        },
+      })
     end,
   },
 
@@ -582,7 +677,7 @@ require("lazy").setup({
     "nvim-treesitter/nvim-treesitter-context",
     event = { "BufReadPost", "BufNewFile" },
     opts = {
-      max_lines = 3,
+      max_lines = 6,
     },
   },
 
@@ -712,6 +807,7 @@ require("lazy").setup({
         { "<leader>u", desc = "Undo Tree" },
         { "<leader>/", desc = "Fuzzy Find in Buffer" },
         { "<leader>oi", desc = "Organize Imports (Java)" },
+        { "<leader>ot", desc = "Toggle Codeium" },
       })
     end,
   },
@@ -733,6 +829,7 @@ require("lazy").setup({
       "nvim-neotest/nvim-nio",
       "theHamsta/nvim-dap-virtual-text",
       "leoluz/nvim-dap-go",
+      "mfussenegger/nvim-dap-python",
     },
     keys = {
       { "<leader>db", "<cmd>lua require('dap').toggle_breakpoint()<cr>", desc = "Toggle Breakpoint" },
@@ -766,7 +863,85 @@ require("lazy").setup({
       end
 
       require("nvim-dap-virtual-text").setup()
+
+      -- Go debugging
       require("dap-go").setup()
+
+      -- Python debugging
+      require("dap-python").setup(vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python")
+
+      -- C/C++ debugging (codelldb)
+      dap.adapters.codelldb = {
+        type = "server",
+        port = "${port}",
+        executable = {
+          command = vim.fn.stdpath("data") .. "/mason/bin/codelldb",
+          args = { "--port", "${port}" },
+        },
+      }
+
+      dap.configurations.c = {
+        {
+          name = "Launch",
+          type = "codelldb",
+          request = "launch",
+          program = function()
+            return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+          end,
+          cwd = "${workspaceFolder}",
+          stopOnEntry = false,
+        },
+      }
+
+      dap.configurations.cpp = dap.configurations.c
+
+      -- C# debugging (netcoredbg)
+      dap.adapters.coreclr = {
+        type = "executable",
+        command = vim.fn.stdpath("data") .. "/mason/bin/netcoredbg",
+        args = { "--interpreter=vscode" },
+      }
+
+      dap.configurations.cs = {
+        {
+          type = "coreclr",
+          name = "launch - netcoredbg",
+          request = "launch",
+          program = function()
+            return vim.fn.input("Path to dll: ", vim.fn.getcwd() .. "/bin/Debug/", "file")
+          end,
+        },
+      }
+
+      -- JavaScript/TypeScript debugging (handled by vscode-js-debug in ftplugin)
+      dap.adapters["pwa-node"] = {
+        type = "server",
+        host = "localhost",
+        port = "${port}",
+        executable = {
+          command = "node",
+          args = { vim.fn.stdpath("data") .. "/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js", "${port}" },
+        },
+      }
+
+      for _, lang in ipairs({ "typescript", "javascript", "typescriptreact", "javascriptreact" }) do
+        dap.configurations[lang] = {
+          {
+            type = "pwa-node",
+            request = "launch",
+            name = "Launch file",
+            program = "${file}",
+            cwd = "${workspaceFolder}",
+          },
+          {
+            type = "pwa-node",
+            request = "attach",
+            name = "Attach",
+            processId = require("dap.utils").pick_process,
+            cwd = "${workspaceFolder}",
+          },
+        }
+      end
     end,
   },
 
@@ -783,6 +958,12 @@ require("lazy").setup({
   {
     "leoluz/nvim-dap-go",
     dependencies = { "mfussenegger/nvim-dap" },
+  },
+
+  {
+    "mfussenegger/nvim-dap-python",
+    dependencies = { "mfussenegger/nvim-dap" },
+    ft = "python",
   },
 
   -- Statusline

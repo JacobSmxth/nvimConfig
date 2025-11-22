@@ -1,3 +1,8 @@
+-- Only run for cpp files
+if vim.bo.filetype ~= "cpp" then
+  return
+end
+
 local map = vim.keymap.set
 local opts = { buffer = true, silent = true }
 
